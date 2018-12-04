@@ -486,7 +486,7 @@ $(counter_start_object).
     });
 
 $(counter_start_object).
-    on(app_vars['counter_start'] + '.adLinkFly.counter', function(e) {
+    on(app_vars['counter_start'] + '.SafeLinkBk.counter', function(e) {
       if (ad_type === 'banner') {
         var timer = $('#timer');
 
@@ -548,7 +548,7 @@ checkPrivateMode();
 /**
  * Report invalid link
  */
-$('#go-link').one('submit.adLinkFly.counterSubmit', function(e) {
+$('#go-link').one('submit.SafeLinkBk.counterSubmit', function(e) {
   e.preventDefault();
   var goForm = $(this);
 
