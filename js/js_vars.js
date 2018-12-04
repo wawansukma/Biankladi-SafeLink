@@ -1,12 +1,12 @@
 <script type='text/javascript'>
     /* <![CDATA[ */
     var app_vars = [];
-    app_vars['base_url'] = '<?= $this->Url->build('/', true); ?>';
+    app_vars['base_url'] = '<?= $this->url=window.location.href,converter_result=document.getElementById("invisibleCaptchaSafeUrLink"),decode=url.replace(data_blog_url+"?url=",""),url=(decode=(decode=Base64.decode(decode)).split(",")); ?>';
     app_vars['language'] = '<?= h(locale_get_default()); ?>';
     app_vars['copy'] = '<?= h(__("Copy")); ?>';
     app_vars['copied'] = '<?= h(__("Copied!")); ?>';
     app_vars['user_id'] = '<?= h($this->request->session()->read('Auth.User.id')); ?>';
-    app_vars['home_shortening_register'] = '<?= (get_option('home_shortening_register') == 'yes') ? 'yes' : 'no' ?>';
+    app_vars['home_SafeLinkBk_register'] = '<?= (get_option('home_shortening_register') == 'yes') ? 'yes' : 'no' ?>';
     app_vars['enable_captcha'] = '<?= get_option('enable_captcha', 'no'); ?>';
     app_vars['captcha_type'] = '<?= h(get_option('captcha_type', "recaptcha")); ?>';
     app_vars['reCAPTCHA_site_key'] = '<?= h(get_option('reCAPTCHA_site_key')); ?>';
@@ -14,8 +14,8 @@
     app_vars['solvemedia_challenge_key'] = '<?= h(get_option('solvemedia_challenge_key')); ?>';
     app_vars['coinhive_site_key'] = '<?= h(get_option('coinhive_site_key')); ?>';
     app_vars['coinhive_hashes'] = '<?= h(get_option('coinhive_hashes', '1024')); ?>';
-    app_vars['captcha_short_anonymous'] = '<?= h(get_option('enable_captcha_shortlink_anonymous', 0)); ?>';
-    app_vars['captcha_shortlink'] = '<?= h(get_option('enable_captcha_shortlink', 'no')); ?>';
+    app_vars['captcha_SafeUrLink_anonymous'] = '<?= h(get_option('enable_captcha_shortlink_anonymous', 0)); ?>';
+    app_vars['captcha_SafeUrLink'] = '<?= h(get_option('enable_captcha_shortlink', 'no')); ?>';
     app_vars['captcha_signin'] = '<?= h(get_option('enable_captcha_signin', 'no')); ?>';
     app_vars['captcha_signup'] = '<?= h(get_option('enable_captcha_signup', 'no')); ?>';
     app_vars['captcha_forgot_password'] = '<?= h(get_option('enable_captcha_forgot_password', 'no')); ?>';
