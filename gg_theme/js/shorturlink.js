@@ -1,5 +1,5 @@
-// var endpoint = "https://www.jsonstore.io/79a85a647a95f875559fd3683f975e61b120279d8dcfd0e7e73e764979b3332e"; //production
-var endpoint = "https://www.jsonstore.io/555c7f37bd06ffbffa45384535655a49ff6d320dc9f3966f54e5e1e3a09f0b27"; //for experiments on development
+// var endpoint = "https://www.jsonstore.io/dc45a1554c5dc2f32bf738af60d55c2556f970f7986ca1e3fec0f381b76c4486"; //production
+var endpoint = "https://www.jsonstore.io/93b3bf751b7214eee5653fb3255d3c0443c8cc89db4aa20e0051149fc3e374a9"; //for experiments on development
 
 var hashh = window.location.hash.substr(1);
 if (window.location.hash != "") {
