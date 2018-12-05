@@ -13,7 +13,7 @@ if (window.location.hash != "") {
     });
 }
 
-$("#SafeUrLink button").click(shorturl);
+$("#shorten button").click(shorturl);
 
 function cinp(){
     document.getElementById("erbox").innerHTML = "";
