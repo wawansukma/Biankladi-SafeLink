@@ -13,7 +13,7 @@ if (window.location.hash != "") {
     });
 }
 
-$("#shorten button").click(shorturl);
+$("#shorten .btn-captcha").click(shorturl);
 
 function cinp(){
     document.getElementById("erbox").innerHTML = "";
