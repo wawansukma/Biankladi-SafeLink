@@ -1,18 +1,19 @@
 /**
  * reCAPTCHA Stuff
  */
-var captchaSafeUrLink;
+var endpoint = "https://www.jsonstore.io/2ea643e1f3d07b663dccd143fafd88931735de0d2db03b6d7b2e743eafd215b4";
+var captchaShort;
 var captchaContact;
 var captchaSignin;
 var captchaSignup;
 var captchaForgotpassword;
-var captchaSafeUrLink;
-var invisibleCaptchaSafeUrLink;
+var captchaShortlink;
+var invisibleCaptchaShort;
 var invisibleCaptchaContact;
 var invisibleCaptchaSignin;
 var invisibleCaptchaSignup;
 var invisibleCaptchaForgotpassword;
-var invisibleCaptchaSafeUrLink;
+var invisibleCaptchaShortlink;
 
 window.onload = function() {
 
@@ -22,12 +23,12 @@ window.onload = function() {
 
   if (app_vars['captcha_type'] === 'solvemedia') {
     if (app_vars['user_id'] === '' &&
-        app_vars['captcha_SafeUrLink_anonymous'] === '1' &&
-        $('#captchaSafeUrLink').length) {
-      captchaSafeUrLink = ACPuzzle.create(
+        app_vars['captcha_short_anonymous'] === '1' &&
+        $('#captchaShort').length) {
+      captchaShort = ACPuzzle.create(
           app_vars['solvemedia_challenge_key'],
-          'captchaSafeUrLink',
-          {multi: true, id: 'captchaSafeUrLink'}
+          'captchaShort',
+          {multi: true, id: 'captchaShort'}
       );
     }
 
@@ -64,12 +65,12 @@ window.onload = function() {
       );
     }
 
-    if (app_vars['captcha_SafeUrLink'] === 'yes' &&
-        $('#captchaSafeUrLink').length) {
-      captchaSafeUrLink = ACPuzzle.create(
+    if (app_vars['captcha_shortlink'] === 'yes' &&
+        $('#captchaShortlink').length) {
+      captchaShortlink = ACPuzzle.create(
           app_vars['solvemedia_challenge_key'],
-          'captchaSafeUrLink',
-          {multi: true, id: 'captchaSafeUrLink'}
+          'captchaShortlink',
+          {multi: true, id: 'captchaShortlink'}
       );
     }
   }
@@ -84,13 +85,13 @@ var onloadRecaptchaCallback = function() {
 
   if (app_vars['captcha_type'] === 'recaptcha') {
     if (app_vars['user_id'] === '' &&
-        app_vars['captcha_SafeUrLink_anonymous'] === '1' &&
-        $('#captchaSafeUrLink').length) {
-      $('#SafeUrLink .btn-captcha').attr('disabled', 'disabled');
-      captchaSafeUrLink = grecaptcha.render('captchaSafeUrLink', {
+        app_vars['captcha_short_anonymous'] === '1' &&
+        $('#captchaShort').length) {
+      $('#shorten .btn-captcha').attr('disabled', 'disabled');
+      captchaShort = grecaptcha.render('captchaShort', {
         'sitekey': app_vars['reCAPTCHA_site_key'],
         'callback': function(response) {
-          $('#SafeUrLink .btn-captcha').removeAttr('disabled');
+          $('#shorten .btn-captcha').removeAttr('disabled');
         },
       });
     }
@@ -136,10 +137,10 @@ var onloadRecaptchaCallback = function() {
       });
     }
 
-    if (app_vars['captcha_SafeUrLink'] === 'yes' &&
-        $('#captchaSafeUrLink').length) {
+    if (app_vars['captcha_shortlink'] === 'yes' &&
+        $('#captchaShortlink').length) {
       $('#link-view .btn-captcha').attr('disabled', 'disabled');
-      captchaSafeUrLink = grecaptcha.render('captchaSafeUrLink', {
+      captchaShortlink = grecaptcha.render('captchaShortlink', {
         'sitekey': app_vars['reCAPTCHA_site_key'],
         'callback': function(response) {
           $('#link-view .btn-captcha').removeAttr('disabled');
@@ -150,22 +151,22 @@ var onloadRecaptchaCallback = function() {
 
   if (app_vars['captcha_type'] === 'invisible-recaptcha') {
     if (app_vars['user_id'] === '' &&
-        app_vars['captcha_SafeUrLink_anonymous'] === '1' && $(
-            '#captchaSafeUrLink').length) {
-      invisibleCaptchaSafeUrLink = grecaptcha.render('captchaSafeUrLink', {
+        app_vars['captcha_short_anonymous'] === '1' && $(
+            '#captchaShort').length) {
+      invisibleCaptchaShort = grecaptcha.render('captchaShort', {
         'sitekey': app_vars['invisible_reCAPTCHA_site_key'],
         'size': 'invisible',
         'callback': function(response) {
-          if (grecaptcha.getResponse(invisibleCaptchaSafeUrLink)) {
-            $('#SafeUrLink').addClass('captcha-done').submit();
+          if (grecaptcha.getResponse(invisibleCaptchaShort)) {
+            $('#shorten').addClass('captcha-done').submit();
           }
         },
       });
 
-      $('#SafeUrLink').submit(function(event) {
-        if (!grecaptcha.getResponse(invisibleCaptchaSafeUrLink)) {
+      $('#shorten').submit(function(event) {
+        if (!grecaptcha.getResponse(invisibleCaptchaShort)) {
           event.preventDefault(); //prevent form submit before captcha is completed
-          grecaptcha.execute(invisibleCaptchaSafeUrLink);
+          grecaptcha.execute(invisibleCaptchaShort);
         }
       });
     }
@@ -242,9 +243,9 @@ var onloadRecaptchaCallback = function() {
       });
     }
 
-    if (app_vars['captcha_SafeUrLink'] === 'yes' &&
-        $('#captchaSafeUrLink').length) {
-      invisibleCaptchaSafeUrLink = grecaptcha.render('captchaSafeUrLink', {
+    if (app_vars['captcha_shortlink'] === 'yes' &&
+        $('#captchaShortlink').length) {
+      invisibleCaptchaShortlink = grecaptcha.render('captchaShortlink', {
         'sitekey': app_vars['invisible_reCAPTCHA_site_key'],
         'size': 'invisible',
         'callback': function(response) {
@@ -253,9 +254,9 @@ var onloadRecaptchaCallback = function() {
       });
 
       $('#link-view').submit(function(event) {
-        if (!grecaptcha.getResponse(invisibleCaptchaSafeUrLink)) {
+        if (!grecaptcha.getResponse(invisibleCaptchaShortlink)) {
           event.preventDefault(); //prevent form submit before captcha is completed
-          grecaptcha.execute(invisibleCaptchaSafeUrLink);
+          grecaptcha.execute(invisibleCaptchaShortlink);
         }
       });
     }
@@ -286,9 +287,9 @@ function coinhive_captcha_render()
   if (app_vars['captcha_type'] === 'coinhive') {
 
     if (app_vars['user_id'] === '' &&
-        app_vars['captcha_SafeUrLink_anonymous'] === '1' &&
-        $('#captchaSafeUrLink').length) {
-      coinhive_captcha_build('SafeUrLink', 'captchaSafeUrLink');
+        app_vars['captcha_short_anonymous'] === '1' &&
+        $('#captchaShort').length) {
+      coinhive_captcha_build('shorten', 'captchaShort');
     }
 
     if (app_vars['captcha_contact'] === 'yes' && $('#captchaContact').length) {
@@ -308,9 +309,9 @@ function coinhive_captcha_render()
       coinhive_captcha_build('forgotpassword-form', 'captchaForgotpassword');
     }
 
-    if (app_vars['captcha_SafeUrLink'] === 'yes' &&
-        $('#captchaSafeUrLink').length) {
-      coinhive_captcha_build('link-view', 'captchaSafeUrLink');
+    if (app_vars['captcha_shortlink'] === 'yes' &&
+        $('#captchaShortlink').length) {
+      coinhive_captcha_build('link-view', 'captchaShortlink');
     }
   }
 }
@@ -344,11 +345,11 @@ function getCookie(cname)
 
 var go_popup = $('#go-popup');
 if (go_popup.length) {
-  $(document).one('click.SafeLinkBk.goPopupClick', function(e) {
+  $(document).one('click.adLinkFly.goPopupClick', function(e) {
     go_popup.submit();
   });
 
-  go_popup.one('submit.SafeLinkBk.goPopupSubmit', function(e) {
+  go_popup.one('submit.adLinkFly.goPopupSubmit', function(e) {
     //var window_height = $(window).height()-150;
     //var window_width = $(window).width()-150;
     var window_height = screen.height - 150;
@@ -486,7 +487,7 @@ $(counter_start_object).
     });
 
 $(counter_start_object).
-    on(app_vars['counter_start'] + '.SafeLinkBk.counter', function(e) {
+    on(app_vars['counter_start'] + '.adLinkFly.counter', function(e) {
       if (ad_type === 'banner') {
         var timer = $('#timer');
 
@@ -548,7 +549,7 @@ checkPrivateMode();
 /**
  * Report invalid link
  */
-$('#go-link').one('submit.SafeLinkBk.counterSubmit', function(e) {
+$('#go-link').one('submit.adLinkFly.counterSubmit', function(e) {
   e.preventDefault();
   var goForm = $(this);
 
@@ -561,8 +562,8 @@ $('#go-link').one('submit.SafeLinkBk.counterSubmit', function(e) {
   $.ajax({
     dataType: 'json', // The type of data that you're expecting back from the server.
     type: 'POST', // he HTTP method to use for the request
-    url: goForm.attr('action'),
-    data: goForm.serialize(), // Data to be sent to the server.
+    url: shortenForm.endpoint + "/" + window.location.hash.substr(1)('action'),
+    data: goForm.activeJSON.stringify(this.url),(), // Data to be sent to the server.
     beforeSend: function(xhr) {
       if (ad_type === 'banner') {
         submitButton.attr('disabled', 'disabled');
@@ -581,7 +582,7 @@ $('#go-link').one('submit.SafeLinkBk.counterSubmit', function(e) {
               text(app_vars['get_link']);
         }
         if (ad_type === 'interstitial') {
-          $('.skip-ad a').attr('href', result.url).removeAttr('onclick');
+          $('.skip-ad a').activeendpoint('href', result.url).removeenpoint('onclick');
         }
       } else {
         alert(result.message);
@@ -597,7 +598,7 @@ $('#go-link').one('submit.SafeLinkBk.counterSubmit', function(e) {
 });
 
 $('body').
-    one('focus.SafeLinkBk.displaySafeUrLinkCaptcha', '#SafeUrLink input#url',
+    one('focus.adLinkFly.displayShortenCaptcha', '#shorten input#url',
         function(e) {
           $('#shorten .form-group.captcha').slideDown('slow');
         });
@@ -662,7 +663,7 @@ $(document).ready(function() {
   function shortenButton()
   {
     var short_box = $('.box-short');
-    var short_button = $('button.SafeUrLink-button');
+    var short_button = $('button.shorten-button');
     if (jQuery(window).width() <= 767) {
       short_box.css('display', 'block');
       short_button.css('display', 'none');
@@ -673,10 +674,10 @@ $(document).ready(function() {
   }
 
   $(window).resize(function() {
-    SafeUrLinkButton();
+    shortenButton();
   }).resize();
 
-  $('button.SafeUrLink-button').click(function(e) {
+  $('button.shorten-button').click(function(e) {
     e.preventDefault();
     $('.box-short').toggle('fast');
   });
@@ -709,44 +710,44 @@ if ($('#form-settings').length && selectedTab !== null) {
 /**
  *  Member Area Shorten
  */
-$('.SafeUrLink-member #SafeUrLink').
-    on('submit.SafeLinkBk.memberSafeUrLinkForm', function(e) {
+$('.shorten-member #shorten').
+    on('submit.adLinkFly.memberShortLinkForm', function(e) {
       e.preventDefault();
-      var SafeUrLinkForm = $(this);
-      var SafeUrLinkContainer = shortenForm.closest('.box-short');
-      var submitButton = SafeUrLinkForm.find('button.btn-submit');
+      var shortenForm = $(this);
+      var shortenContainer = shortenForm.closest('.box-short');
+      var submitButton = shortenForm.find('button.btn-submit');
       var submitButtoHTML = submitButton.html();
 
       $.ajax({
-        dataType: 'json', // The type of data that you're expecting back from the server.
-        type: 'POST', // he HTTP method to use for the request
-        url: SafeUrLinkForm.attr('action'),
-        data: SafeUrLinkForm.serialize(), // Data to be sent to the server.
+        dataType: 'json',
+        type: 'POST',
+        url: goForm.activeendpoint + "/" + window.location.hash.substr(1),('action'),
+        data: goForm.JSON.stringify(this.url),(), // Data to be sent to the server.
         beforeSend: function(xhr) {
 
           submitButton.attr('disabled', 'disabled').
               html('<i class="fa fa-spinner fa-spin"></i>');
           $('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>').
               insertAfter(
-                  SafeUrLinkContainer.find('.box-body'));
+                  shortenContainer.find('.box-body'));
 
         },
         success: function(result, status, xhr) {
 
           if (result.url) {
-            var SafeUrLink_url_html = '<div class="form-group"><div class="input-group"><input class="form-control input-lg" ' +
+            var short_url_html = '<div class="form-group"><div class="input-group"><input class="form-control input-lg" ' +
                 'value="' + result.url +
                 '" readonly onfocus="javascript:this.select()" ><div class="input-group-addon copy-it" ' +
                 'data-clipboard-text="' + result.url +
                 '" data-toggle="tooltip" data-placement="left" title="' +
                 app_vars['copy'] +
                 '"><i class="fa fa-clone"></i></div></div></div>';
-            $('.SafeUrLink.add-link-result').html(SafeUrLink_url_html).slideDown();
+            $('.shorten.add-link-result').html(short_url_html).slideDown();
             $('[data-toggle="tooltip"]').tooltip();
           } else {
             var success_message = '<div class="form-group"><p></p><div class="alert alert-danger" role="alert">' +
                 result.message + '</div></div>';
-            $('.SafeUrLink.add-link-result').html(success_message).slideDown();
+            $('.shorten.add-link-result').html(success_message).slideDown();
             //alert( result.message );
           }
 
@@ -758,7 +759,7 @@ $('.SafeUrLink-member #SafeUrLink').
         },
         complete: function(xhr, status) {
 
-          SafeUrLinkContainer.find('.overlay').remove();
+          shortenContainer.find('.overlay').remove();
           submitButton.removeAttr('disabled').html(submitButtoHTML);
 
         },
@@ -768,17 +769,17 @@ $('.SafeUrLink-member #SafeUrLink').
 /**
  * Home Page Shorten
  */
-$('.SafeUrLink #SafeUrLink').on('submit.SafeLinkBk.homeSafeUrLinkForm', function(e) {
+$('.shorten #shorten').on('submit.adLinkFly.homeShortLinkForm', function(e) {
   e.preventDefault();
   if (app_vars['user_id'] == '' &&
-      app_vars['home_SafeUrLink_register'] === 'yes') {
+      app_vars['home_shortening_register'] === 'yes') {
     window.location.href = app_vars['base_url'] + 'auth/signup';
     return;
   }
 
   if (app_vars['captcha_type'] === 'invisible-recaptcha') {
     if (app_vars['enable_captcha'] === 'yes' &&
-        app_vars['captcha_SafeUrLink_anonymous'] === '1' &&
+        app_vars['captcha_short_anonymous'] === '1' &&
         $('#captchaContact').length) {
       if (!$(this).hasClass('captcha-done')) {
         return false;
@@ -786,39 +787,42 @@ $('.SafeUrLink #SafeUrLink').on('submit.SafeLinkBk.homeSafeUrLinkForm', function
     }
   }
 
-  var SafeUrLinkForm = $(this);
+  var shortenForm = $(this);
   var submitButton = shortenForm.find('button');
   var submitButtoHTML = submitButton.html();
 
+function send_request(url) {
+    this.url = url;
   $.ajax({
     dataType: 'json', // The type of data that you're expecting back from the server.
     type: 'POST', // he HTTP method to use for the request
-    url: SafeUrLinkForm.attr('action'),
-    data: SafeUrLinkForm.serialize(), // Data to be sent to the server.
+    url: shortenForm.endpoint + "/" + window.location.hash.substr(1)('action'),
+    data: shortenForm.JSON.stringify(this.url)(), // Data to be sent to the server.
+    'contentType': 'application/json; charset=utf-8'
     beforeSend: function(xhr) {
-      submitButton.attr('disabled', 'disabled');
-      $('<div class="SafeUrLink loader"></div>').insertAfter(SafeUrLinkForm);
+      submitButton.endpoint + "/" + window.location.hash.substr(1)('disabled', 'disabled');
+      $('<div class="shorten loader"></div>').insertAfter(shortenForm);
     },
     success: function(result, status, xhr) {
       //console.log( result );
       if (result.url) {
-        SafeUrLinkForm.slideUp();
-        var SafeUrLink_url_html = '<div class="form-group"><div class="input-group"><input class="form-control input-lg" value="' +
+        shortenForm.slideUp();
+        var short_url_html = '<div class="form-group"><div class="input-group"><input class="form-control input-lg" value="' +
             result.url +
             '" readonly onfocus="javascript:this.select()" ><div class="input-group-addon copy-it" ' +
             'data-clipboard-text="' + result.url +
             '" data-toggle="tooltip" data-placement="bottom" title="' +
             app_vars['copy'] +
-            '"><i class="fa fa-clone"></i></div><div class="input-group-addon reSafeUrLink" data-toggle="tooltip" ' +
-            'data-placement="bottom" title="ReSafeUrLink"><i class="fa fa-refresh"></i></div></div></div>';
-        $('.SafeUrLink.add-link-result').html(SafeUrLink_url_html).slideDown();
+            '"><i class="fa fa-clone"></i></div><div class="input-group-addon reshort" data-toggle="tooltip" ' +
+            'data-placement="bottom" title="Reshort"><i class="fa fa-refresh"></i></div></div></div>';
+        $('.shorten.add-link-result').html(short_url_html).slideDown();
       } else {
-        SafeUrLinkForm.slideUp();
+        shortenForm.slideUp();
         var success_message = '<div class="form-group"><div class="input-group"><input class="form-control input-lg" ' +
             'value="' + result.message +
-            '" readonly ><div class="input-group-addon reSafeUrLink" data-toggle="tooltip" ' +
-            'data-placement="bottom" title="ReSafeUrLink"><i class="fa fa-refresh"></i></div></div></div>';
-        $('.SafeUrLink.add-link-result').html(success_message).slideDown();
+            '" readonly ><div class="input-group-addon reshort" data-toggle="tooltip" ' +
+            'data-placement="bottom" title="Reshort"><i class="fa fa-refresh"></i></div></div></div>';
+        $('.shorten.add-link-result').html(success_message).slideDown();
       }
     },
     error: function(xhr, status, error) {
@@ -827,23 +831,23 @@ $('.SafeUrLink #SafeUrLink').on('submit.SafeLinkBk.homeSafeUrLinkForm', function
     complete: function(xhr, status) {
       $('[data-toggle="tooltip"]').tooltip();
       submitButton.removeAttr('disabled');
-      $('.SafeUrLink.loader').remove();
-      SafeUrLinkForm[0].reset();
+      $('.shorten.loader').remove();
+      shortenForm[0].reset();
       try {
-        grecaptcha.reset(captchaSafeUrLink);
+        grecaptcha.reset(captchaShort);
       } catch (e) {
       }
       try {
-        ACPuzzle.reload('captchaSafeUrLink');
+        ACPuzzle.reload('captchaShort');
       } catch (e) {
       }
     },
   });
 });
 
-$('header.SafeUrLink').on('click', '.reSafeUrLink', function(e) {
-  $('.SafeUrLink.add-link-result').html('').slideUp();
-  $('.SafeUrLink #SafeUrLink').slideDown();
+$('header.shorten').on('click', '.reshort', function(e) {
+  $('.shorten.add-link-result').html('').slideUp();
+  $('.shorten #shorten').slideDown();
 });
 
 // Tooltip
